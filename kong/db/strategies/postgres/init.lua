@@ -109,7 +109,7 @@ local function expand(name, map)
         if entity == key.entity then
           c[n+1] = '_["'
           c[n+2] = field.from
-          c[n+3] = '"] ~= null'
+          c[n+3] = '"]'
           c[n+4] = " and "
           n=n+4
         end
@@ -131,20 +131,16 @@ local function expand(name, map)
         end
       end
       c[n+1] = "  }\n\n"
-      c[n+2] = "else\n"
-      c[n+3] = '  _["'
-      c[n+4] = field.entity
-      c[n+5] = '"] = null\n'
-      c[n+6] = "end\n"
-      c[n+7] = '_["'
-      c[n+8] = field.from
-      c[n+9] = '"] = nil\n'
-      n=n+9
+      c[n+2] = "end\n"
+      c[n+3] = '_["'
+      c[n+4] = field.from
+      c[n+5] = '"] = nil\n'
+      n=n+5
     end
   end
   c[n+1] = "return _"
 
-  return load(concat(c), "=" .. name, "t", { null = null })
+  return load(concat(c), "=" .. name, "t")
 end
 
 
